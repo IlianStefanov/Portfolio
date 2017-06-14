@@ -1,0 +1,119 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 19/09/2016 12:27
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-amazon:before { content: "\f100"; }
+.flaticon-android:before { content: "\f101"; }
+.flaticon-apple:before { content: "\f102"; }
+.flaticon-behance:before { content: "\f103"; }
+.flaticon-blackberry:before { content: "\f104"; }
+.flaticon-blogger:before { content: "\f105"; }
+.flaticon-deviantart:before { content: "\f106"; }
+.flaticon-dribbble:before { content: "\f107"; }
+.flaticon-dropbox:before { content: "\f108"; }
+.flaticon-facebook:before { content: "\f109"; }
+.flaticon-flickr:before { content: "\f10a"; }
+.flaticon-google-chrome:before { content: "\f10b"; }
+.flaticon-google-drive:before { content: "\f10c"; }
+.flaticon-google-play:before { content: "\f10d"; }
+.flaticon-google-plus:before { content: "\f10e"; }
+.flaticon-instagram:before { content: "\f10f"; }
+.flaticon-internet-explorer:before { content: "\f110"; }
+.flaticon-kickstarter:before { content: "\f111"; }
+.flaticon-linkedin:before { content: "\f112"; }
+.flaticon-opera:before { content: "\f113"; }
+.flaticon-paypal:before { content: "\f114"; }
+.flaticon-picasa:before { content: "\f115"; }
+.flaticon-pinterest:before { content: "\f116"; }
+.flaticon-reddit:before { content: "\f117"; }
+.flaticon-skype:before { content: "\f118"; }
+.flaticon-snapchat:before { content: "\f119"; }
+.flaticon-soundcloud:before { content: "\f11a"; }
+.flaticon-steam:before { content: "\f11b"; }
+.flaticon-stumbleupon:before { content: "\f11c"; }
+.flaticon-tumblr:before { content: "\f11d"; }
+.flaticon-twitter:before { content: "\f11e"; }
+.flaticon-viber:before { content: "\f11f"; }
+.flaticon-vimeo:before { content: "\f120"; }
+.flaticon-vine:before { content: "\f121"; }
+.flaticon-whatsapp:before { content: "\f122"; }
+.flaticon-windows:before { content: "\f123"; }
+.flaticon-wordpress:before { content: "\f124"; }
+.flaticon-yahoo:before { content: "\f125"; }
+.flaticon-yelp:before { content: "\f126"; }
+.flaticon-youtube:before { content: "\f127"; }
+    
+    $font-Flaticon-amazon: "\f100";
+    $font-Flaticon-android: "\f101";
+    $font-Flaticon-apple: "\f102";
+    $font-Flaticon-behance: "\f103";
+    $font-Flaticon-blackberry: "\f104";
+    $font-Flaticon-blogger: "\f105";
+    $font-Flaticon-deviantart: "\f106";
+    $font-Flaticon-dribbble: "\f107";
+    $font-Flaticon-dropbox: "\f108";
+    $font-Flaticon-facebook: "\f109";
+    $font-Flaticon-flickr: "\f10a";
+    $font-Flaticon-google-chrome: "\f10b";
+    $font-Flaticon-google-drive: "\f10c";
+    $font-Flaticon-google-play: "\f10d";
+    $font-Flaticon-google-plus: "\f10e";
+    $font-Flaticon-instagram: "\f10f";
+    $font-Flaticon-internet-explorer: "\f110";
+    $font-Flaticon-kickstarter: "\f111";
+    $font-Flaticon-linkedin: "\f112";
+    $font-Flaticon-opera: "\f113";
+    $font-Flaticon-paypal: "\f114";
+    $font-Flaticon-picasa: "\f115";
+    $font-Flaticon-pinterest: "\f116";
+    $font-Flaticon-reddit: "\f117";
+    $font-Flaticon-skype: "\f118";
+    $font-Flaticon-snapchat: "\f119";
+    $font-Flaticon-soundcloud: "\f11a";
+    $font-Flaticon-steam: "\f11b";
+    $font-Flaticon-stumbleupon: "\f11c";
+    $font-Flaticon-tumblr: "\f11d";
+    $font-Flaticon-twitter: "\f11e";
+    $font-Flaticon-viber: "\f11f";
+    $font-Flaticon-vimeo: "\f120";
+    $font-Flaticon-vine: "\f121";
+    $font-Flaticon-whatsapp: "\f122";
+    $font-Flaticon-windows: "\f123";
+    $font-Flaticon-wordpress: "\f124";
+    $font-Flaticon-yahoo: "\f125";
+    $font-Flaticon-yelp: "\f126";
+    $font-Flaticon-youtube: "\f127";
