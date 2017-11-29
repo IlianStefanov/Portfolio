@@ -1,349 +1,242 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>ScrollMagic Infographics</title>
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<!--    <link href="css/styles.css" rel="stylesheet">-->
-    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed:400,700" rel="stylesheet">
-    <title>project</title>
 
-    <link rel="stylesheet" type="text/css" href="css/main.css" />
-    <link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css" />
-    <!--     <link rel="stylesheet" type="text/css" href="css/examples.css" />-->
+    <link rel="stylesheet" href="css/normalize.min.css">
 
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <!-- SCRIPTS -->
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/main.css">
 
-<!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
-
-
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-
-    <!--  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.4/jquery.fullpage.css" />-->
-    <!--  <link rel="stylesheet" type="text/css" href="app/scripts/examples.css" />-->
-
-    <!--
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.4/jquery.fullpage.js"></script>
-  <script type="text/javascript" src="app/scripts/examples.js"></script>
--->
-
-<!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
-
-    <script type="text/javascript" src="js/jquery.fullPage.js"></script>
-    <script type="text/javascript" src="js/examples.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#fullpage').fullpage({
-                anchors: ['firstPage', 'secondPage', '3rdPage', 'fourthPage'],
-                //                sectionsColor: ['#C63D0F', '#1BBC9B', '#7E8F7C'],
-                navigation: true,
-                navigationPosition: 'right',
-                navigationTooltips: ['First page', 'Second page', 'Third and last page', 'Not so fast'],
-                menu: "#menu"
-            });
-        });
-
-    </script>
-
-
-    <script>
-        function pathPrepare($el) {
-            var lineLength = $el[0].getTotalLength();
-            $el.css("stroke-dasharray", lineLength);
-            $el.css("stroke-dashoffset", lineLength);
-        }
-
-        var $word = $("path#word");
-        var $dot = $("path#dot");
-
-        // prepare SVG
-        pathPrepare($word);
-        pathPrepare($dot);
-
-        // init controller
-        var controller = new ScrollMagic.Controller();
-
-        // build tween
-        var tween = new TimelineMax()
-            .add(TweenMax.to($word, 0.9, {
-                strokeDashoffset: 0,
-                ease: Linear.easeNone
-            })) // draw word for 0.9
-            .add(TweenMax.to($dot, 0.1, {
-                strokeDashoffset: 0,
-                ease: Linear.easeNone
-            })) // draw dot for 0.1
-            .add(TweenMax.to("path", 1, {
-                stroke: "#33629c",
-                ease: Linear.easeNone
-            }), 0); // change color during the whole thing
-
-        // build scene
-        var scene = new ScrollMagic.Scene({
-                triggerElement: "#trigger1",
-                duration: 200,
-                tweenChanges: true
-            })
-            .setTween(tween)
-            .addIndicators() // add indicators (requires plugin)
-            .addTo(controller);
-
-    </script>
-    <link rel="shortcut icon" href="../favicon.ico">
+    <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 
 <body>
 
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
 
-    <header id="header">
-        <div class="fullscreenmenu">
-
-                <ul>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Blog</a> </li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-
-            </div>
-        <div class="header-top">
-            <div class="pre-header">
-
-            </div>
-        </div>
-
-        <ul class="cb-slideshow">
-            <li><span>Image 01</span>
-                <div>
-                    <h3>se·ren·i·ty</h3>
-                </div>
-            </li>
-            <li><span>Image 02</span>
-                <div>
-                    <h3>com·po·sure</h3>
-                </div>
-            </li>
-            <li><span>Image 03</span>
-                <div>
-                    <h3>e·qua·nim·i·ty</h3>
-                </div>
-            </li>
-            <li><span>Image 04</span>
-                <div>
-                    <h3>bal·ance</h3>
-                </div>
-            </li>
-            <li><span>Image 05</span>
-                <div>
-                    <h3>qui·e·tude</h3>
-                </div>
-            </li>
-            <li><span>Image 06</span>
-                <div>
-                    <h3>re·lax·a·tion</h3>
-                </div>
-            </li>
-        </ul>
-
-        <div class="container">
-            <!-- Codrops top bar -->
-            <div class="codrops-top">
-
-                <span class="right">
-                    
-                </span>
-                <div class="clr"></div>
-            </div>
-            <!--/ Codrops top bar -->
-            <header>
-                <!--
-                <h1><span>Hi!, I am Ilian and I am professional web developer</span></h1>
-                <h2>Welcome to my <span>PORTFOLIO</span></h2>
--->
-                <!--
-				<p class="codrops-demos">
-					<a href="index.html">Demo 1</a>
-					<a href="index2.html">Demo 2</a>
-					<a href="index3.html">Demo 3</a>
-					<a class="current-demo" href="index4.html">Demo 4</a>
-				</p>
--->
-            </header>
-        </div>
-    </header>
-
-    <ul id="menu">
-        <li class="logo">
-            <img src="images/qewfw.png" alt="logo">
-        </li>
-        <div class="menu-links-wrapper">
-            <li data-menuanchor="firstPage" class="active"><a href="#firstPage">HOME</a></li>
-            <li data-menuanchor="secondPage"><a href="#secondPage">ABOUT ME</a></li>
-            <li data-menuanchor="3rdPage"><a href="#3rdPage">CONTACTS</a></li>
-            <li data-menuanchor="fourthPage"><a href="#fourthPage">PROJECTS</a></li>
-        </div>
+    <div id="main" class="slide01-active">
         
-        <div id="nav-container">
-  <div class="toggle-icon">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
-  </div><!-- /toggle-icon -->
-</div><!-- /nav-container -->
-<!--
-        <li class="hamburger">
-            <nav class="menu">
-
-                <div class="strokes"></div>
-
-                <div class="strokes"></div>
-
-                <div class="strokes"></div>
-
-            </nav>
-       </li>
--->
-
-
-    </ul>
-
-
-    <div id="fullpage">
-        <div class="section" id="section0">
-            <div class="intro">
-                <div id="particles-js"></div>
-                <div class="about-me-section">
-
-                    <div class="row">
-
-                        <div class="col-md-6 col-xs-12 first-col-resume">
-                            <!--                           <img src="images/profile.jpg" alt="" class="profile-picture">-->
-                            <img src="http://via.placeholder.com/200x200" alt="" class="profile-picture">
-                            <h2 class="intro-text">Hello, my name is Ilian and I am a professional <br> Web <span class="developer">DEVELOPER</span></h2>
-                            <!--                    <hr class="fancy-line"></hr>-->
-
-                            <div class="social-icons-section">
-                                <i class="fa fa-facebook-square facebook" aria-hidden="true"></i>
-                                <i class="fa fa-twitter social-icons-set twitter" aria-hidden="true"></i>
-                                <i class="fa fa-github social-icons-set github" aria-hidden="true"></i>
-                                <i class="fa fa-linkedin social-icons-set linkedin" aria-hidden="true"></i>
-                                <i class="fa fa-instagram social-icons-set instagram" aria-hidden="true"></i>
-                                <a class="download1" href="images/kkekek.jpg" download>DOWNLOAD MY CV</a>
-                            </div>
-
-
-                        </div>
-
-                        <div class="col-md-6 col-xs-12 social-icons">
-
-
-                            <div id="login-box">
-                                <div class="logo">
-
-                                    <!--                                <h1 class="logo-caption"><span class="tweak">L</span>ogin</h1>-->
-                                </div>
-                                <!-- /.logo -->
-                                <p class="intro-text" v>You can find me on social media </p>
-                                <span class="or">OR</span>
-                                <p class="intro-text">simply download my CV for more descriptive information bekgraund snimka s opacity i cheren filtur na taq sekciq </p>
-                                <!--                           <hr class="style17">-->
-
-                                <div class="arrow animated bounce">
-                                    <img width="40" height="40" alt="" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNi4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik0yOTMuNzUxLDQ1NS44NjhjLTIwLjE4MSwyMC4xNzktNTMuMTY1LDE5LjkxMy03My42NzMtMC41OTVsMCwwYy0yMC41MDgtMjAuNTA4LTIwLjc3My01My40OTMtMC41OTQtNzMuNjcyDQoJbDE4OS45OTktMTkwYzIwLjE3OC0yMC4xNzgsNTMuMTY0LTE5LjkxMyw3My42NzIsMC41OTVsMCwwYzIwLjUwOCwyMC41MDksMjAuNzcyLDUzLjQ5MiwwLjU5NSw3My42NzFMMjkzLjc1MSw0NTUuODY4eiIvPg0KPHBhdGggZmlsbD0iI0ZGRkZGRiIgZD0iTTIyMC4yNDksNDU1Ljg2OGMyMC4xOCwyMC4xNzksNTMuMTY0LDE5LjkxMyw3My42NzItMC41OTVsMCwwYzIwLjUwOS0yMC41MDgsMjAuNzc0LTUzLjQ5MywwLjU5Ni03My42NzINCglsLTE5MC0xOTBjLTIwLjE3OC0yMC4xNzgtNTMuMTY0LTE5LjkxMy03My42NzEsMC41OTVsMCwwYy0yMC41MDgsMjAuNTA5LTIwLjc3Miw1My40OTItMC41OTUsNzMuNjcxTDIyMC4yNDksNDU1Ljg2OHoiLz4NCjwvc3ZnPg0K" />
-                                </div>
-
-
-                                <!--
-                                <div class="controls">
-                                    <input type="text" name="username" placeholder="Username" class="form-control" />
-                                    <input type="text" name="username" placeholder="Password" class="form-control" />
-                                    <button type="button" class="btn btn-default btn-block btn-custom">Login</button>
-                                </div>
--->
-                                <!-- /.controls -->
-                                <!--                                <p class="resume">Currently I am working in Bulgaria. If you want to know more about me find me on social media from the links that I Provided</p>-->
-
-                                <a class="download2" href="images/kkekek.jpg" download>DOWNLOAD</a>
-                            </div>
-                            <!-- /#login-box -->
-
-
-
-                        </div>
-
-                    </div>
-                    <!--
-                    <img src="images/profile.jpg" alt="" class="profile-picture">
-                    <h2 class="intro-text">Hello, my name is Ilian and I am a professional Web <span class="developer">Developer</span></h2>
--->
-                </div>
-
-                <!--
-                <div class="social-medias">
-                    
-                     <h1>kekekeke</h1>
-                    <p>kekekekekkk
-                    akwekfakwekgaw
-                    akweawegaweg
-                    aewgawe</p>
-                    
-                </div>
--->
+        <div class="pin-wrapper">
+        
+            <div class="logo-container">
+                <p class="logo">
+                    <img src="img/iht-logo-big.svg" alt="">
+                    <span>presence</span>
+                </p>
             </div>
-        </div>
 
-        <div class="section" id="section1">
 
-            <div class="slide" id="slide1">
-                <div class="intro">
-                    <h1>Clickable</h1>
-                    <p>
-                        You can even click on the navigation and jump directly to another section.
+
+            <div class="nav-container">
+                    <nav>
+                        <div class="nav-active"></div>
+                        <ul class="nav-items">
+                            <li class="nav-item01 active"><a href="#slide01">Go to slide 01</a></li>
+                            <li class="nav-item02"><a href="#slide02">Go to slide 02</a></li>
+                            <li class="nav-item03"><a href="#slide03">Go to slide 03</a></li>
+                            <li class="nav-item04"><a href="#slide04">Go to slide 04</a></li>
+                            <li class="nav-item05"><a href="#slide05">Go to slide 05</a></li>
+                            <li class="nav-item06"><a href="#slide06">Go to slide 06</a></li>
+                            <li class="nav-item07"><a href="#slide07">Go to slide 07</a></li>
+                            <li class="nav-item08"><a href="#slide08">Go to slide 08</a></li>
+                            <li class="nav-item09"><a href="#slide09">Go to slide 09</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+
+
+            <div id="slide01" class="slide active">
+                <div class="bcg-color"></div>
+                <div class="bcg-white"></div>
+                <div class="primary">
+                    <div class="bcg"></div>
+                    <p class="number">100</p>
+                </div>
+                <div class="secondary">
+                    <p class="title">
+                        <strong class="fade-txt">awwwards.com</strong>
+                        <em class="fade-txt">websites</em>
+                        <span class="fade-txt">deconstructed</span>
+                    </p>
+                </div>
+
+            </div>
+
+            <div id="slide02" class="slide">
+                <div class="bcg-color"></div>
+                <div class="bcg-white"></div>
+                <div class="primary">
+                    <div class="bcg"></div>
+                    <p class="number">93%</p>
+                </div>
+                <div class="secondary">
+                    <p class="title">
+                        <strong class="fade-txt">use</strong>
+                        <em class="fade-txt">CSS</em>
+                        <span class="fade-txt">animations</span>
                     </p>
                 </div>
             </div>
 
-            <div class="slide" id="slide2">
-                <h1>Slide 2</h1>
+            <div id="slide03" class="slide">
+                <div class="bcg-color"></div>
+                <div class="bcg-white"></div>
+                <div class="primary">
+                    <div class="bcg"></div>
+                    <p class="number">91%</p>
+                </div>
+                <div class="secondary">
+                    <p class="title">
+                        <strong class="fade-txt">use</strong>
+                        <em class="fade-txt">javascript</em>
+                        <span class="fade-txt">animations</span>
+                    </p>
+                </div>
             </div>
 
-        </div>
-        <div class="section" id="section2">
-            <div class="intro">
-                <h1>KEKKE it</h1>
+            <div id="slide04" class="slide">
+                <div class="bcg-color"></div>
+                <div class="bcg-white"></div>
+                <div class="primary">
+                    <div class="bcg"></div>
+                    <p class="number">83%</p>
+                </div>
+                <div class="secondary">
+                    <p class="title">
+                        <strong class="fade-txt">use</strong>
+                        <em class="fade-txt">SVG</em>
+                        <span class="fade-txt"></span>
+                    </p>
+                </div>
             </div>
-        </div>
 
-        <div class="section" id="section3">
-            <div class="intro">
-                <h1>Navigation dots</h1>
-                <p>An easy and beautiful way to navigate throw the sections</p>
+            <div id="slide05" class="slide">
+                <div class="bcg-color"></div>
+                <div class="bcg-white"></div>
+                <div class="primary">
+                    <div class="bcg"></div>
+                    <p class="number">71%</p>
+                </div>
+                <div class="secondary">
+                    <p class="title">
+                        <strong class="fade-txt">use</strong>
+                        <em class="fade-txt">jQuery</em>
+                        <span class="fade-txt"></span>
+                    </p>
+                </div>
             </div>
-        </div>
 
-        <!--
-        <div class="section" id="section4">
-            <div class="intro">
-                <h1>Navigation dots</h1>
-                <p>An easy and beautiful way to navigate throw the sections</p>
+            <div id="slide06" class="slide">
+                <div class="bcg-color"></div>
+                <div class="bcg-white"></div>
+                <div class="primary">
+                    <div class="bcg"></div>
+                    <p class="number">69%</p>
+                </div>
+                <div class="secondary">
+                    <p class="title">
+                        <strong class="fade-txt">use</strong>
+                        <em class="fade-txt">scrolling</em>
+                        <span class="fade-txt">animations</span>
+                    </p>
+                </div>
+            </div>
+
+            <div id="slide07" class="slide">
+                <div class="bcg-color"></div>
+                <div class="bcg-white"></div>
+                <div class="primary">
+                    <div class="bcg"></div>
+                    <p class="number">65%</p>
+                </div>
+                <div class="secondary">
+                    <p class="title">
+                        <strong class="fade-txt">use</strong>
+                        <em class="fade-txt">GreenSock</em>
+                        <span class="fade-txt"></span>
+                    </p>
+                </div>
+            </div>
+
+            <div id="slide08" class="slide">
+                <div class="bcg-color"></div>
+                <div class="bcg-white"></div>
+                <div class="primary">
+                    <div class="bcg"></div>
+                    <p class="number">50%</p>
+                </div>
+                <div class="secondary">
+                    <p class="title">
+                        <strong class="fade-txt">use</strong>
+                        <em class="fade-txt">HTML5</em>
+                        <span class="fade-txt">canvas</span>
+                    </p>
+                </div>
+            </div>
+
+            <div id="slide09" class="slide">
+                <div class="bcg-color"></div>
+                <div class="bcg-white"></div>
+                <div class="primary">
+                    <div class="bcg"></div>
+                    <p class="number">Share</p>
+                </div>
+                <div class="secondary">
+                    <p class="title">
+                        <span class="fade-txt">With Friends</span>
+                    </p>
+                </div>
             </div>
         </div>
-        <div class="section" id="section5">
-            <div class="intro">
-                <h1>Navigation dots</h1>
-                <p>An easy and beautiful way to navigate throw the sections</p>
-            </div>
+        <div class="fake-height">
+           <div id="slide01-pos"></div>
+           <div id="slide02-pos" class="slide-pos"></div>
+           <div id="slide03-pos" class="slide-pos"></div>
+           <div id="slide04-pos" class="slide-pos"></div>
+           <div id="slide05-pos" class="slide-pos"></div>
+           <div id="slide06-pos" class="slide-pos"></div>
+           <div id="slide07-pos" class="slide-pos"></div>
+           <div id="slide08-pos" class="slide-pos"></div>
+           <div id="slide09-pos" class="slide-pos"></div>     
+            <div class="nav-trigger"></div>
         </div>
--->
+        
     </div>
-    <script type="text/javascript" src="js/main.js"></script>
+    <!-- #main-container -->
+
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/enquire.js/2.1.2/enquire.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.3/plugins/TextPlugin.min.js"></script>
+        <!--
+        <script src="js/greensock/plugins/DrawSVGPlugin.min.js"></script>
+        <script src="js/greensock/plugins/ScrambleTextPlugin.min.js"></script>
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/plugins/ScrollToPlugin.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.js"></script>
+        <script type="text/javascript" src="js/jquery.scrollify.min.js"></script>
+        <script src="js/main.js"></script>
 </body>
 
 </html>
