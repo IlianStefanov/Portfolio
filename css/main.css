@@ -258,12 +258,13 @@ body, html {
 }
 
 @media only screen and (min-width: 1025px) {
-/*
     body {
         opacity: 0;
     }
-    
-*/
+    .no-js body,
+    .touch body {
+        opacity: 1;
+    }
     /* =LOGO */
     .logo-container {
         width: 37%;
@@ -275,7 +276,7 @@ body, html {
     .logo {
         right: 7%;
         left: auto;
-        
+        visibility: hidden;
     }
     .logo-iht {
         height: 124px;
@@ -320,6 +321,19 @@ body, html {
         
         -webkit-box-shadow: -12px 0px 57px 1px rgba(0,0,0,0.75);
         box-shadow: -12px 0px 57px 1px rgba(0,0,0,0.75);
+    }
+    .bcg {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-clip: #222;
+        opacity: 1;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+        -webkit-transform-origin: 0% 50%;
+        transform-origin: 0% 50%;
     }
     .bcg-white {
         z-index: 2;
@@ -533,6 +547,24 @@ body, html {
     #slide07-pos {top: 640%;}
     #slide08-pos {top: 740%;}
     #slide09-pos {top: 840%;}
+    
+    .slide-pos-reverse {
+        z-index: 100;
+        position: absolute;
+        top: 70%;
+        left: 75%;
+        width: 10px;
+        height: 10px;
+        background-color: black; 
+    }
+    #slide02-pos-reverse {top: 170%;}
+    #slide03-pos-reverse {top: 270%;}
+    #slide04-pos-reverse {top: 370%;}
+    #slide05-pos-reverse {top: 470%;}
+    #slide06-pos-reverse {top: 570%;}
+    #slide07-pos-reverse {top: 670%;}
+    #slide08-pos-reverse {top: 770%;}
+
 }
 
 @media only screen and (min-width: 1140px) {

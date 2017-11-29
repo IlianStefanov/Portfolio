@@ -27,8 +27,23 @@ $(document).ready(function(){
         $navItem = $('.nav-items li').not('.active'),
         $navTrigger = $('nav-trigger'),
         getTriggersDown = $('.slide-pos'),
-        triggersDown = [];
+        triggersDown = [],
+        getTriggersUp = $('.slide-pos-reverse'),
+        triggersUp = [],
+        $slideIn = $('.slide.active'),
+        $logo = $('.logo'),
+        $main = $('#main'),
+        $body = $('body'),
+        $slide = $('.slide'),
+        $nav = $('nav');
         
+        
+        
+    $.each(getTriggersUp, function(key, value) {
+        var idUp = '#' + value.id;
+        triggersUp.push(idUp);
+        console.log(triggersUp[key]);
+    });
     
     $.each(getTriggersDown, function(key, value) {
         var id = '#'+ value.id;
@@ -104,14 +119,21 @@ $(document).ready(function(){
     
     
     
-    // =Scene 3 Trigger the Right Animation
+    // =Scene 3 Trigger the Right Animation DOWN
     triggersDown.forEach(function(triggerDown, index) {
         var triggerTransitionToNext = new ScrollMagic.Scene({
             triggerElement: triggerDown,
             triggerHook: 0.6
         })
         .on('enter', function(e) {
-            console.log("crossfade to next")
+            var $slideOut = $('.slide.active'),
+                slideIndex = triggerDown.substring(6,8),
+                $slideIn = $('#slide' + slideIndex),
+                direction = e.scrollDirection;
+                console.log('=== DIRECTION ON SCROLL ===');
+                console.log(direction);
+                
+            crossFade($slideOut, $slideIn, direction);
         })
         .addIndicators({
             name: 'trigger',
@@ -120,4 +142,60 @@ $(document).ready(function(){
         .addTo(controller);
         
     });
+    
+     // =Scene 4 Trigger the Right Animation UP
+    triggersUp.forEach(function(triggerUp, index) {
+        var triggerTransitionToPrev = new ScrollMagic.Scene({
+            triggerElement: triggerUp,
+            triggerHook: 0.49
+        })
+        .on('leave', function(e) {
+            console.log("crossfade to prev" + triggerUp)
+        })
+        .addIndicators({
+            name: 'triggerUp',
+            indent: 210,
+            colorStart: 'black',
+            colorTrigger: 'black'
+        })
+        .addTo(controller); 
+    });
+    
+    function init() {
+        setTimeout(function() {
+            // Prevents body from flickering
+            TweenMax.set($body, {autoAlpha: 1});
+            // Trigger animation
+            
+            animationIn($slideIn);
+        }, 500);
+        
+    }
+    
+    init();
+    
+    // CrossFade
+    function crossFade($slideOut, $slideIn, direction) {
+        
+    } 
+    
+    // ANIMATING BIG NUMBER LEFT
+    function animationIn($slideIn) {
+        var $slideInNumber = $slideIn.find('.number'),
+            $slideInTitle = $slideIn.find('.fade-txt'),
+            $primaryBcg = $slideIn.find('.primary .bcg'),
+            $dgreyBcg = $slideIn.find('.bcg-white'),
+            transitionInTl = new TimelineMax();
+        
+        transitionInTl
+            .set([$slide, $slideInNumber, $nav, $logo], { autoAlpha: 0 })
+            .set($slideIn, { autoAlpha: 1 })
+            .set($dgreyBcg, {scaleX:1})
+            .set($primaryBcg, {scaleX:0})
+            .to($dgreyBcg, 0.4, {scaleX: 0.63, ease: Power2.easeIn})
+            .to($primaryBcg, 0.4, {scaleX: 1, ease: Power2.easeOut})
+            .add('fadeInLogo') 
+            .to($dgreyBcg, 0.6, {scaleX: 0, ease: Power4.easeIn})
+    }
+    
 });
