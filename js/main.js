@@ -25,7 +25,30 @@ $(document).ready(function(){
 	// Variables
     var controller,
         $navItem = $('.nav-items li').not('.active'),
-        $navTrigger = $('nav-trigger');
+        $navTrigger = $('nav-trigger'),
+        getTriggersDown = $('.slide-pos'),
+        triggersDown = [];
+        
+    
+    $.each(getTriggersDown, function(key, value) {
+        var id = '#'+ value.id;
+        triggersDown.push(id);
+        
+        console.log(triggersDown[key]);
+    });
+    
+    // triggersDown = [
+	// 	"#slide02-pos",
+	// 	"#slide03-pos",
+	// 	"#slide04-pos",
+	// 	"#slide05-pos",
+	// 	"#slide06-pos",
+	// 	"#slide07-pos",
+	// 	"#slide08-pos",
+	// 	"#slide09-pos"
+	// ]
+    
+    
     
     // Init ScrollMagic Controller
     controller = new ScrollMagic.Controller();
@@ -64,7 +87,9 @@ $(document).ready(function(){
     .setTween(navTL)
     .addTo(controller);
     
-    
+    $navItem.each(function() {
+        var triggerSlide
+    }); 
 //    // =Scene 3 Changing the slides 
 //    var slides = ['#slide01','#slide02', '#slide03', '#slide04','#slide05','#slide06','#slide07','#slide08','#slide09'];
 //    
@@ -76,4 +101,23 @@ $(document).ready(function(){
 //        .setClassToggle('slide', '.active')
 //        .addTo(controller);
 //    });
+    
+    
+    
+    // =Scene 3 Trigger the Right Animation
+    triggersDown.forEach(function(triggerDown, index) {
+        var triggerTransitionToNext = new ScrollMagic.Scene({
+            triggerElement: triggerDown,
+            triggerHook: 0.6
+        })
+        .on('enter', function(e) {
+            console.log("crossfade to next")
+        })
+        .addIndicators({
+            name: 'trigger',
+            indent: 520
+        })
+        .addTo(controller);
+        
+    });
 });
