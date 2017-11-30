@@ -177,7 +177,8 @@ $(document).ready(function(){
             slideInBcg = $slideIn.find('.bcg-color'),
             $slideInTitle = $slideIn.find('.title .fade-txt'),
             $slideInNumber = $slideIn.find('.number'),
-            $slideInBcgWhite = $slideIn.find('.primary .bcg');
+            $slideInBcgWhite = $slideIn.find('.primary .bcg'),
+            slideInValue = $slideInNumber.attr('data-value');
         
         console.log("====== SLIDES for NAV ======");
         console.log("This is slide out ID: " + slideOutID);
@@ -201,8 +202,36 @@ $(document).ready(function(){
                   .to([$slideOutTitle, $slideOutNumber], 0.3, {autoAlpha: 0, ease:Linear.easeNone})
                   .set($main, {className: 'slide' + slideInID + '-active'})
                   .set($slideInNumber, {text: '0'})
-                  .to($slideInNumber, 1.2, {autoAlpha: 1, ease:Linear.easeNone});
-        
+                  .add('countingUp')
+				  .to($slideInBcgWhite, 0.3, {autoAlpha: 1, ease:Linear.easeNone}, 'countingUp-=0.4')
+				  .staggerFromTo($slideInTitle, 0.3, {autoAlpha: 0, x: '-=20'}, {autoAlpha: 1, x: 0, ease:Power1.easeOut}, 0.1, 'countingUp+=1.1')
+                  ;
+            //crossFadeTl.timeScale(0.5);
+
+			// count up or scramble text
+			if(slideInID == 09){
+
+				// scramble text
+				var scrambleTextTl = new TimelineMax();
+				scrambleTextTl.to($slideInNumber, 1.4, {scrambleText: 'Share', autoAlpha: 1, ease:Power1.easeOut});
+
+				crossFadeTl.add(scrambleTextTl, 'countingUp');
+
+			} else {
+
+				// count up
+				var countUpText = new TimelineMax({paused: true});
+
+				// fade number in
+				countUpText.to($slideInNumber, 1.2, {autoAlpha: 1, ease:Linear.easeNone, onUpdate: updateValue, onUpdateParams: ['{self}', slideInValue, $slideInNumber]});
+
+				var countUpTl = new TimelineMax();
+				countUpTl.to(countUpText, 1, {progress: 1, ease:Power3.easeOut});
+
+				crossFadeTl.add(countUpTl, 'countingUp');
+
+			}
+
     } 
     
     // ANIMATING BIG NUMBER LEFT
@@ -224,37 +253,26 @@ $(document).ready(function(){
             .to($dgreyBcg, 0.6, {scaleX: 0, ease: Power4.easeIn}, 'fadeInLogo+=0.3')
             .to([$logo, $slideInNumber], 0.2, {autoAlpha: 1, ease:Linear.easeNone}, 'fadeInLogo-=0.2')
             .staggerFrom($slideInTitle, 0.3, {autoAlpha: 0, x: '-=60', ease: Power1.easeOut}, 0.1, 'fadeInLogo+=0.9')
-            .fromTo($nav, 0.3, {y: -15, autoAlpha: 0, }, { autoAlpha: 1, y: 0, ease: Power1.easeOut}, 'fadeInLogo+=1.5')
-            .add('countingUp')
-            ;
-            //        transitionInTl.timeScale(2);
-        
-            var countUpText = new TimelineMax({paused: true});
-        
-        
-            //fade Number in
-            countUpText
-                .to($slideInNumber, 1.2, {autoAlpha: 0, ease:Linear.easeNone, onUpdate: updateValue, onUpdateParams: ['{self}', 95, $slideInNumber]});
-                
-            var countUpTl = new TimelineMax();
-                countUpTl.to(countUpText, 1, {progress: 1, ease: Power3.easeOut});
-            
-            // Adding =COUNT UP to the crossfade TL
-//            crossFadeTl.add(countUpTl, 'countingUp');
-        
+            .fromTo($nav, 0.3, {y: -15, autoAlpha: 0, }, { autoAlpha: 1, y: 0, ease: Power1.easeOut}, 'fadeInLogo+=1.5');
             
         }
     
     function updateValue(tl, slideInValue, $slideInNumber) {
-        var newValue = parseInt(tl.progress() * slideInValue);
-        
-        if(slideInValue == 100) {
-            $slideInNumber.text(newValue);
-        } else {
-            $slideInNumber.text(newValue + '%');
-        }
-        
-    } 
+
+			var newValue = parseInt(tl.progress() * slideInValue);
+
+			// don't include % for the initial slide
+			if(slideInValue == 100){
+
+				$slideInNumber.text(newValue);
+
+			} else {
+
+				$slideInNumber.text(newValue+'%'); //not good for the first and last slide
+
+			}
+
+		}
     
     function updateNav(slideOutID, slideInID) {
         // Remove active class from all dots
