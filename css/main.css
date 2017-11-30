@@ -313,7 +313,7 @@ body, html {
     .primary {
         width: 37%;
     }
-    .secondary {
+    .slide.active .secondary {
         width: 63%;
         left: auto;
         right: 0;
@@ -481,7 +481,7 @@ body, html {
     
     .slide01-active .nav-active {border-color: #FC866E;}
     .slide01-active .nav-items .active a {background-color:#FC866E;}
-
+    
     .slide02-active .nav-active {border-color: #6C45BB;}
     .slide02-active .nav-items .active a {background-color:#6C45BB;}
 

@@ -38,7 +38,7 @@ $(document).ready(function(){
         $nav = $('nav');
         
         
-        
+    // === Filling Up the arrays
     $.each(getTriggersUp, function(key, value) {
         var idUp = '#' + value.id;
         triggersUp.push(idUp);
@@ -68,14 +68,14 @@ $(document).ready(function(){
     // Init ScrollMagic Controller
     controller = new ScrollMagic.Controller();
     
-  // Scene 1 - pin our main section
-        var pinScene01 = new ScrollMagic.Scene({
-            triggerElement: '#main',
-            triggerHook: 0,
-            duration: '900%'
-        })
-        .setPin("#main .pin-wrapper", {pushFollowers: false})
-        .addTo(controller);
+    // Scene 1 - pin our main section
+    var pinScene01 = new ScrollMagic.Scene({
+        triggerElement: '#main',
+        triggerHook: 0,
+        duration: '900%'
+    })
+    .setPin("#main .pin-wrapper", {pushFollowers: false})
+    .addTo(controller);
     $('.pin-wrapper').css({
            "position": 'fixed'
     });
@@ -105,17 +105,7 @@ $(document).ready(function(){
     $navItem.each(function() {
         var triggerSlide
     }); 
-//    // =Scene 3 Changing the slides 
-//    var slides = ['#slide01','#slide02', '#slide03', '#slide04','#slide05','#slide06','#slide07','#slide08','#slide09'];
-//    
-//    slides.each(function(e) {
-//        var currentSlide = new ScrollMagic.Scene({
-//            triggerElement: slides[e], 
-//            duration: '50%'
-//        })
-//        .setClassToggle('slide', '.active')
-//        .addTo(controller);
-//    });
+
     
     
     
@@ -133,7 +123,7 @@ $(document).ready(function(){
                 console.log('=== DIRECTION ON SCROLL ===');
                 console.log(direction);
                 
-            crossFade($slideOut, $slideIn, direction);
+            crossFade($slideOut, $slideIn, direction, slideIndex);
         })
         .addIndicators({
             name: 'trigger',
@@ -166,16 +156,52 @@ $(document).ready(function(){
             // Prevents body from flickering
             TweenMax.set($body, {autoAlpha: 1});
             // Trigger animation
-            
             animationIn($slideIn);
         }, 500);
         
     }
     
+    //Init Project
     init();
     
     // CrossFade
-    function crossFade($slideOut, $slideIn, direction) {
+    function crossFade($slideOut, $slideIn, direction, slideIndex) {
+        var slideOutID = $slideOut.attr('id').substring(5,7),
+            slideInID = $slideIn.attr('id').substring(5,7),
+            // Slide OUT BCG vars
+            slideOutBcg = $slideOut.find('.bcg-color'),
+            $slideOutTitle = $slideOut.find('.title .fade-txt'),
+            $slideOutNumber = $slideOut.find('.number'),
+            
+            // Slide In BCG vars
+            slideInBcg = $slideIn.find('.bcg-color'),
+            $slideInTitle = $slideIn.find('.title .fade-txt'),
+            $slideInNumber = $slideIn.find('.number'),
+            $slideInBcgWhite = $slideIn.find('.primary .bcg');
+        
+        console.log("====== SLIDES for NAV ======");
+        console.log("This is slide out ID: " + slideOutID);
+        console.log("This is slide in ID: " + slideInID);
+        
+        //Update Nav
+        updateNav(slideOutID, slideInID);
+        
+        //Removing active class from all slides
+        TweenMax.set($slide, {className: '-=active'});
+        
+        //Add aclass active to current slide
+        TweenMax.set('#slide' + slideIndex, {className: '+=active'});
+        
+        //Cross fade timeline ==========================
+        var crossFadeTl = new TimelineMax();
+        
+        crossFadeTl
+                  .set($slideIn, {autoAlpha: 1})
+                  .set([$slideInNumber, $slideInTitle, $slideInBcgWhite], {autoAlpha: 0})
+                  .to([$slideOutTitle, $slideOutNumber], 0.3, {autoAlpha: 0, ease:Linear.easeNone})
+                  .set($main, {className: 'slide' + slideInID + '-active'})
+                  .set($slideInNumber, {text: '0'})
+                  .to($slideInNumber, 1.2, {autoAlpha: 1, ease:Linear.easeNone});
         
     } 
     
@@ -193,9 +219,50 @@ $(document).ready(function(){
             .set($dgreyBcg, {scaleX:1})
             .set($primaryBcg, {scaleX:0})
             .to($dgreyBcg, 0.4, {scaleX: 0.63, ease: Power2.easeIn})
-            .to($primaryBcg, 0.4, {scaleX: 1, ease: Power2.easeOut})
+            .to($primaryBcg, 0.4, {scaleX: 1, ease: Power2.easeOut, clearProps: 'all'})
             .add('fadeInLogo') 
-            .to($dgreyBcg, 0.6, {scaleX: 0, ease: Power4.easeIn})
+            .to($dgreyBcg, 0.6, {scaleX: 0, ease: Power4.easeIn}, 'fadeInLogo+=0.3')
+            .to([$logo, $slideInNumber], 0.2, {autoAlpha: 1, ease:Linear.easeNone}, 'fadeInLogo-=0.2')
+            .staggerFrom($slideInTitle, 0.3, {autoAlpha: 0, x: '-=60', ease: Power1.easeOut}, 0.1, 'fadeInLogo+=0.9')
+            .fromTo($nav, 0.3, {y: -15, autoAlpha: 0, }, { autoAlpha: 1, y: 0, ease: Power1.easeOut}, 'fadeInLogo+=1.5')
+            .add('countingUp')
+            ;
+            //        transitionInTl.timeScale(2);
+        
+            var countUpText = new TimelineMax({paused: true});
+        
+        
+            //fade Number in
+            countUpText
+                .to($slideInNumber, 1.2, {autoAlpha: 0, ease:Linear.easeNone, onUpdate: updateValue, onUpdateParams: ['{self}', 95, $slideInNumber]});
+                
+            var countUpTl = new TimelineMax();
+                countUpTl.to(countUpText, 1, {progress: 1, ease: Power3.easeOut});
+            
+            // Adding =COUNT UP to the crossfade TL
+//            crossFadeTl.add(countUpTl, 'countingUp');
+        
+            
+        }
+    
+    function updateValue(tl, slideInValue, $slideInNumber) {
+        var newValue = parseInt(tl.progress() * slideInValue);
+        
+        if(slideInValue == 100) {
+            $slideInNumber.text(newValue);
+        } else {
+            $slideInNumber.text(newValue + '%');
+        }
+        
+    } 
+    
+    function updateNav(slideOutID, slideInID) {
+        // Remove active class from all dots
+        $('.nav-items li').removeClass('active');
+        
+        // Add active classto new active item
+        TweenMax.set($('.nav-items li.nav-item' + slideInID), {className: '+=active'});
+        
     }
     
 });
