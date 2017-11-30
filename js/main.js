@@ -191,7 +191,7 @@ $(document).ready(function(){
         console.log("This is slide out ID: " + slideOutID);
         console.log("This is slide in ID: " + slideInID);
         
-        if(slide)
+        
         //Update Nav
         updateNav(slideOutID, slideInID);
         
