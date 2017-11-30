@@ -9,7 +9,7 @@ $(document).ready(function(){
             easing: "easeOutExpo",
             scrollSpeed: 1100,
             offset : 0,
-            scrollbars: true,
+            scrollbars: false,
             standardScrollElements: "",
             setHeights: true,
             overflowScroll: true,
@@ -37,7 +37,7 @@ $(document).ready(function(){
         $slide = $('.slide'),
         $nav = $('nav');
         
-        
+    console.log("SLIDE IN ===== " + $slideIn);
     // === Filling Up the arrays
     $.each(getTriggersUp, function(key, value) {
         var idUp = '#' + value.id;
@@ -140,7 +140,14 @@ $(document).ready(function(){
             triggerHook: 0.49
         })
         .on('leave', function(e) {
-            console.log("crossfade to prev" + triggerUp)
+            var $slideOut = $('.slide.active'),
+                slideIndex = triggerUp.substring(6,8),
+                $slideIn = $('#slide' + slideIndex),
+                direction = e.scrollDirection;
+            
+            crossFade($slideOut, $slideIn, direction, slideIndex);
+            
+            console.log("crossfade to prev" + triggerUp);
         })
         .addIndicators({
             name: 'triggerUp',
@@ -169,12 +176,12 @@ $(document).ready(function(){
         var slideOutID = $slideOut.attr('id').substring(5,7),
             slideInID = $slideIn.attr('id').substring(5,7),
             // Slide OUT BCG vars
-            slideOutBcg = $slideOut.find('.bcg-color'),
+            $slideOutBcg = $slideOut.find('.bcg-color'),
             $slideOutTitle = $slideOut.find('.title .fade-txt'),
             $slideOutNumber = $slideOut.find('.number'),
             
             // Slide In BCG vars
-            slideInBcg = $slideIn.find('.bcg-color'),
+            $slideInBcg = $slideIn.find('.bcg-color'),
             $slideInTitle = $slideIn.find('.title .fade-txt'),
             $slideInNumber = $slideIn.find('.number'),
             $slideInBcgWhite = $slideIn.find('.primary .bcg'),
@@ -184,6 +191,7 @@ $(document).ready(function(){
         console.log("This is slide out ID: " + slideOutID);
         console.log("This is slide in ID: " + slideInID);
         
+        if(slide)
         //Update Nav
         updateNav(slideOutID, slideInID);
         
@@ -203,13 +211,44 @@ $(document).ready(function(){
                   .set($main, {className: 'slide' + slideInID + '-active'})
                   .set($slideInNumber, {text: '0'})
                   .add('countingUp')
-				  .to($slideInBcgWhite, 0.3, {autoAlpha: 1, ease:Linear.easeNone}, 'countingUp-=0.4')
-				  .staggerFromTo($slideInTitle, 0.3, {autoAlpha: 0, x: '-=20'}, {autoAlpha: 1, x: 0, ease:Power1.easeOut}, 0.1, 'countingUp+=1.1')
+                  .to($slideInBcgWhite, 0.3, {autoAlpha: 1, ease:Linear.easeNone}, 'countingUp-=0.4')
+                  .staggerFromTo($slideInTitle, 0.3, {autoAlpha: 0, x: '-=20'}, {autoAlpha: 1, x: 0, ease:Power1.easeOut}, 0.1, 'countingUp+=1.1');
+				  
+			  
+        
                   ;
             //crossFadeTl.timeScale(0.5);
 
+        
+            // crossfade for boths UP abd down 
+            if(direction == 'FORWARD') {
+               var tweenBcg = TweenMax.fromTo(
+                        $slideInBcg, 0.7,
+                        {autoAlpha: 0}, 
+                        {   
+                            autoAlpha: 1,
+                            ease: Linear.easeNone,
+                            onComplete: hideOldSLide,
+                            onCompleteParams: [$slideOut]
+                        }
+                  );
+                crossFadeTl.add(tweenBcg, 'countingUp-=0.3');
+            } else {
+                var tweenBcg = TweenMax.to(
+                        $slideOutBcg, 0.7,
+                        {   
+                            autoAlpha: 0,
+                            ease: Linear.easeNone,
+                            onComplete: hideOldSLide,
+                            onCompleteParams: [$slideOut]
+                        }
+                  );
+                crossFadeTl.add(tweenBcg, 'countingUp-=0.3');
+            }
+        
+            
 			// count up or scramble text
-			if(slideInID == 09){
+			if(slideInID == '09'){
 
 				// scramble text
 				var scrambleTextTl = new TimelineMax();
@@ -217,7 +256,9 @@ $(document).ready(function(){
 
 				crossFadeTl.add(scrambleTextTl, 'countingUp');
 
-			} else {
+			} else if(slideOutID == "01") {
+                      console.log("SLIDE ID IS ===== " + slideOutID);
+            } else {
 
 				// count up
 				var countUpText = new TimelineMax({paused: true});
@@ -256,6 +297,12 @@ $(document).ready(function(){
             .fromTo($nav, 0.3, {y: -15, autoAlpha: 0, }, { autoAlpha: 1, y: 0, ease: Power1.easeOut}, 'fadeInLogo+=1.5');
             
         }
+    
+    
+    function hideOldSLide($slideOut) {
+        TweenMax.set($slideOut, {autoAlpha: 0});
+    }
+    
     
     function updateValue(tl, slideInValue, $slideInNumber) {
 
