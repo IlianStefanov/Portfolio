@@ -35,7 +35,9 @@ $(document).ready(function(){
 		$slide = $('.slide'),
 		$nav = $('nav'),
 		$layers = $('#layers'),
-		introAnimationTl = new TimelineMax();
+		introAnimationTl = new TimelineMax(),
+        typed;
+
 
 	// triggers on the way down
 	$.each(getTriggersDown, function(key, value){
@@ -140,12 +142,12 @@ $(document).ready(function(){
 				crossFade($slideOut, $slideIn, direction, slideIndex);
 
 			})
-			// .addIndicators({
-			// 	name: 'triggerDown',
-			// 	indent: 520,
-			// 	colorStart: 'yellow',
-			// 	colorTrigger: 'yellow'
-			// })
+			 .addIndicators({
+			 	name: 'triggerDown',
+			 	indent: 520,
+			 	colorStart: 'yellow',
+			 	colorTrigger: 'yellow'
+			 })
 			.addTo(controller);
 
 
@@ -166,16 +168,20 @@ $(document).ready(function(){
 					$slideIn = $('#slide'+slideIndex),
 					direction = e.scrollDirection;
 				
+                if(slideIndex !== 02 ) {
+                    typed.destroy();
+                }
+                
 				//console.log(e.scrollDirection);
 				crossFade($slideOut, $slideIn, direction, slideIndex);
 
 			})
-			// .addIndicators({
-			// 	name: 'triggerUp',
-			// 	indent: 110,
-			// 	colorStart: 'black',
-			// 	colorTrigger: 'black'
-			// })
+			 .addIndicators({
+			 	name: 'triggerUp',
+			 	indent: 110,
+			 	colorStart: 'black',
+			 	colorTrigger: 'black'
+			 })
 			.addTo(controller);
 
 
@@ -206,16 +212,18 @@ $(document).ready(function(){
 				// slide out
 				$slideOutBcg = $slideOut.find('.bcg-color'),
 				$slideOutTitle = $slideOut.find('.title .fade-txt'),
-				$slideOutNumber = $slideOut.find('.number'),
+				$slideOutNumber = $slideOut.find('.title-section'),
                 $slideOutProjects = $slideOut.find('.projects-listing'),
+                $slideOutOptions = $slideIn.find('.projects-options'),
 
-				// slide in
+                // slide in
 				$slideInBcg = $slideIn.find('.bcg-color'),
 				$slideInTitle = $slideIn.find('.title .fade-txt'),
-				$slideInNumber = $slideIn.find('.number'),
+				$slideInNumber = $slideIn.find('.title-section'),
 				$slideInBcgWhite = $slideIn.find('.primary .bcg'),
 				slideInValue = $slideInNumber.attr('data-value'),
-                $slideInProjects = $slideIn.find('.projects-listing')
+                $slideInProjects = $slideIn.find('.projects-listing'),
+                $slideInOptions = $slideIn.find('.projects-options')
 				;
 
             console.log("projects listing: " + $slideOutProjects + "and projects out: " + $slideInProjects);
@@ -237,18 +245,16 @@ $(document).ready(function(){
 				.set([$slideInTitle, $slideInNumber, $slideInBcgWhite], {autoAlpha: 0})
 				.to([$slideOutTitle, $slideOutNumber, $layers], 0.3, {autoAlpha: 0, ease: Linear.easeNone})
 				.set($main, {className: 'slide'+slideInID+'-active'})
-//				.set($slideInNumber, {text: '0'}) // this needs GSAP Text Plugin
 				.add('countingUp')
 				.to($slideInBcgWhite, 0.3, {autoAlpha: 1, ease:Linear.easeNone}, 'countingUp-=0.4')
 				.staggerFromTo($slideInTitle, 0.3, {autoAlpha: 0, x: '-=20'}, {autoAlpha: 1, x: 0, ease:Power1.easeOut}, 0.1, 'countingUp+=1.1')
-                
-				;
+                ;
 
 			//crossFadeTl.timeScale(0.5);
             
             
 			// count up or scramble text
-			if(slideInID == 09){
+			if(slideInID == 09) {
 
 				// scramble text
 				var scrambleTextTl = new TimelineMax();
@@ -256,37 +262,70 @@ $(document).ready(function(){
 
 				crossFadeTl.add(scrambleTextTl, 'countingUp');
 
-			} else if(slideInID == 04) {
-                
-            } else {
-
-				// count up
-				var countUpText = new TimelineMax({paused: true});
-
-				// fade number in
-				countUpText.to($slideInNumber, 1.2, {autoAlpha: 1, ease:Linear.easeNone, onUpdate: updateValue, onUpdateParams: ['{self}', slideInValue, $slideInNumber]});
-
-				var countUpTl = new TimelineMax();
-				countUpTl.to(countUpText, 1, {progress: 1, ease:Power3.easeOut});
-
-				crossFadeTl.add(countUpTl, 'countingUp');
+			} else {
+//				// count up
+//				var countUpText = new TimelineMax({paused: true});
+//
+//				// fade number in
+//				countUpText.to($slideInNumber, 1.2, {autoAlpha: 1, ease:Linear.easeNone, onUpdate: updateValue, onUpdateParams: ['{self}', slideInValue, $slideInNumber]});
+//
+//				var countUpTl = new TimelineMax();
+//				countUpTl.to(countUpText, 1, {progress: 1, ease:Power3.easeOut});
+//
+//				crossFadeTl.add(countUpTl, 'countingUp');
 
 			}
+            if(slideInID == 02) {
+                var slideAboutMeTl = new TimelineMax();
+                slideAboutMeTl
+                    .fromTo($slideInNumber, 0.4, {autoAlpha:0, x: '-=30'}, {scrambleText: 'ABOUT ME', autoAlpha: 1, x: 0, ease:Power1.easeOut});
+                 //.about-me-title  
+                 typed = new Typed('.about-me-title', {
+                   strings: ["First sentence.", "Second sentence."],
+                   typeSpeed: 30
+                 });
+                
+                crossFadeTl.add(slideAboutMeTl, 'countingUp');
+            }  else {
+                $('.about-me-title').text("");
+//                var cursor = document.querySelector('.typed-cursor');
+//                cursor.parentNode.removeChild(cursor);
+            }
+            
+            if(slideInID == 03) {
+                var slideEducation = new TimelineMax();
+                slideEducation
+                    .fromTo($slideInNumber, 0.4, {autoAlpha:0, x: '-=30'}, {scrambleText: 'EDUCATION', autoAlpha: 1, x: 0, ease:Power1.easeOut});
+                
+                crossFadeTl.add(slideEducation, 'countingUp');
+            }
             
             // Animating PROJECTS Listing
             if(slideInID == 04) {
+
                 var projectsListing = new TimelineMax();
-                projectsListing.staggerFromTo($slideInProjects, 0.3, {autoAlpha: 0}, {autoAlpha: 1,
-                ease: Power1.easeOut}, 0.1)
-                .fromTo($slideInNumber, 0.4, {autoAlpha:0, x: '-=30'}, {scrambleText: 'PROJECTS', autoAlpha: 1, x: 0, ease:Power1.easeOut}, 'countingUp-=1.2');
+                projectsListing
+                    .fromTo($slideInNumber, 0.4, {autoAlpha: 0, x: '-=30'}, {scrambleText: 'PROJECTS', autoAlpha: 1, x: 0, ease:Power1.easeOut})
+                    .fromTo($slideInOptions, 0.4, {autoAlpha: 0, x: '-=20'}, {autoAlpha: 1, x: 0, ease: Power4.easeInOut})
+                    .staggerFromTo($slideInProjects, 0.3, {autoAlpha: 0}, {autoAlpha: 1,
+                    ease: Power1.easeOut}, 0.1);
                 
+                
+                
+
                 // scramble text
-				
                 crossFadeTl.add(projectsListing, 'countingUp');
+
             } else {
                 var projectsListingOut = new TimelineMax();
-                projectsListingOut.staggerTo($slideOutProjects, 0.1, {autoAlpha: 0, ease: Power1.easeOut}, 0.1);
+                projectsListingOut
+                .to($slideOutOptions, 0.4, {autoAlpha: 0, ease:Power1.easeOut}) 
+                .staggerTo($slideOutProjects, 0.1, {autoAlpha: 0, ease: Power1.easeOut}, 0.1)
                 
+      
+//                .to($slideOutOptions, 0.3, {autoAlpha: 0, x: '-=20', ease:Power1.easeOut})
+//                .to($slideOutNumber, 0.3, {autoAlpha: 0, x: '-=20', ease:Power1.easeOut}); 
+          
                 crossFadeTl.add(projectsListingOut, 'countingUp');
             }
             
@@ -342,7 +381,7 @@ $(document).ready(function(){
 			TweenMax.set($slideOut, {autoAlpha: 0});
 		}
 
-      
+        // Function with digits effect 
 		function updateValue(tl, slideInValue, $slideInNumber){
 
 			var newValue = parseInt(tl.progress() * slideInValue);
@@ -389,7 +428,7 @@ $(document).ready(function(){
 				.staggerFrom($layer, 2, {autoAlpha: 0, y: -10, ease:Power4.easeInOut}, 0.2, 'fade-=1.5')
 				;
 
-			var $slideInNumber = $slideIn.find('.number'),
+			var $slideInNumber = $slideIn.find('.title-section'),
 				$slideInTitle = $slideIn.find('.fade-txt'),
 				$primaryBcg = $slideIn.find('.primary .bcg'),
 				$whiteBcg = $slideIn.find('.bcg-white'),

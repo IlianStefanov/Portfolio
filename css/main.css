@@ -156,7 +156,7 @@ html, body {
 .primary {
   color: #FC866E;
 }
-.number {
+.title-section {
   font-size: 80px;
   font-family: 'Okomito-Bold';
   margin: 0;
@@ -165,6 +165,9 @@ html, body {
   bottom: 30px;
   left: 0;
   right: 0;
+  
+  -webkit-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 
@@ -176,6 +179,8 @@ html, body {
   padding: 0;
   position: relative;
   top: 20px;
+  -webkit-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
 }
 .title strong {
   font-family: 'Okomito-Bold';
@@ -222,9 +227,12 @@ html, body {
 #slide09 .primary{
     color:#E7395C;
 }
-#slide09 .number {
+#slide09 .title-section {
   font-size: 40px;
   line-height: 40px;
+}
+.title-section {
+    font-size: 80px;
 }
 #slide09 .fade-txt {
     margin-bottom: 15px;
@@ -251,15 +259,15 @@ html, body {
 
 @media only screen and (min-width: 480px) {
   /* =Slide Styles */
-  .number {
+  .title-section {
     font-size: 120px;
     line-height: 120px;
   }
-  #slide01 .number {
+  #slide01 .title-section {
     font-size: 140px;
   }
   .title,
-  #slide09 .number {
+  #slide09 .title-section {
     font-size: 60px;
     line-height: 60px;
   }
@@ -426,7 +434,23 @@ html, body {
   #slide06-pos-reverse {top: 570%;}
   #slide07-pos-reverse {top: 670%;}
   #slide08-pos-reverse {top: 770%;}
-    
+/*  =SLIDE 2 ABOUT ME   */ 
+    .title-wrapper {
+        width: 100%;
+        position: relative;
+        display: block;
+        text-align: center;
+    }
+    .about-me-title {
+        position: relative;
+        display: inline-block;
+        font-size: 80px;
+        line-height: 80px;
+        color: white;
+    }
+    .typed-cursor {
+        font-size: 80px;
+    }
     
 /*  =SLIDE 4 Projects listing   */
 
@@ -440,7 +464,7 @@ html, body {
         transition: all 1s ease-in;
 */
         -webkit-transition: all 0.5s ease-out;
-        transition: all 0.5s ease-out
+        transition: all 0.5s ease-out;
     }
     
 /*
@@ -455,17 +479,23 @@ html, body {
 */
     
     
+    
+
+    
 /*    Projects options */
     .projects-options {
-    
+      padding: 0;
       margin: 0;
       line-height: 80px;
       position: absolute;
       bottom: 30px;
       left: 0;
       right: 0;
-      top: 65%;
+      top: 55%;
       list-style: none;
+        
+      -webkit-transition: all 0.5s ease-out;
+      transition: all 0.5s ease-out;
     }
     .projects-options .option {
         text-align: center;
@@ -565,11 +595,13 @@ html, body {
     color: #fff;
   }
   /* =Slide Styles */
-  .number {
+  .title-section {
     position: absolute;
     top: 40%;
-    right: 5%;
-    left: auto;
+    right: 0;
+    left: 0;
+    text-align: center;
+    width: 100%;
   }
   .title {
     position: absolute;
@@ -580,8 +612,11 @@ html, body {
   #slide01 .bcg-color {background: -webkit-gradient(linear, left top, right top, from(#FC866E), color-stop(37%, #FC866E), to(#FD746C));background: linear-gradient(to right, #FC866E 0%, #FC866E 37%, #FD746C 100%)}
   #slide01 .primary { color: #FC866E;}
   #slide02 .bcg-color {
+/*
       background: -webkit-gradient(linear, left top, right top, from(#6C45BB),color-stop(37%, #6C45BB),to(#c86dd7));
       background: linear-gradient(to right, #6C45BB 0%,#6C45BB 37%,#c86dd7 100%);
+*/
+      background: url('../img/chetster.png') center center fixed / cover;
   }
   #slide02 .primary {
       color: #6C45BB;
@@ -670,17 +705,27 @@ html, body {
 
 @media only screen and (min-width: 1140px) {
     /* =Slide Styles */
-    .number {
-      font-size: 100px;
-      line-height: 100px;
+    .title-section {
+      font-size: 80px;
+      line-height: 80px;
     }
-    #slide01 .number {
+    .title-page {
+        font-size: 80px !important;
+        text-align: center;
+    }
+    #slide01 .title-section {
       font-size: 250px;
     }
     .title,
-    #slide09 .number {
+    #slide09 .title-section {
       font-size: 100px;
       line-height: 100px;
+    }
+    .projects-options {
+        top: 50%;
+    }
+    .title-section {
+        top: 40%;
     }
 }
 
