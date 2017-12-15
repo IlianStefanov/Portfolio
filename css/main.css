@@ -195,7 +195,11 @@ html, body {
 
 /* =Color Variations */
 #slide01 {background: -webkit-gradient(linear, left top, right top, from(#FC866E), color-stop(37%, #FC866E), to(#FD746C));background: linear-gradient(to right, #FC866E 0%, #FC866E 37%, #FD746C 100%)}
-#slide02 {background: -webkit-gradient(linear, left top, right top, from(#6C45BB),color-stop(37%, #6C45BB),to(#c86dd7));background: linear-gradient(to right, #6C45BB 0%,#6C45BB 37%,#c86dd7 100%);}
+#slide02 {
+/*    background: -webkit-gradient(linear, left top, right top, from(#6C45BB),color-stop(37%, #6C45BB),to(#c86dd7));background: linear-gradient(to right, #6C45BB 0%,#6C45BB 37%,#c86dd7 100%);*/
+    
+    background: url(../img/2d1638f9912f69319653d449d399d3ef.jpg) right center / cover;
+}
 #slide02 .primary {
     color: #6C45BB;
 }
@@ -441,15 +445,20 @@ html, body {
         display: block;
         text-align: center;
     }
+    
     .about-me-title {
         position: relative;
         display: inline-block;
         font-size: 80px;
         line-height: 80px;
         color: white;
+        -webkit-transition: all 0.5s ease-out;
+        transition: all 0.5s ease-out;
     }
     .typed-cursor {
         font-size: 80px;
+        -webkit-transition: all 0.5s ease-out;
+        transition: all 0.5s ease-out;
     }
     
 /*  =SLIDE 4 Projects listing   */
@@ -479,8 +488,19 @@ html, body {
 */
     
     
-    
-
+/* =Slide 05 Skills section */
+    .skills-style {
+        display: inline-block;
+        line-height: 10px !important;
+        width: 95%;
+        height: 3px;
+        background: black;
+    }
+    #slide05 .title {
+        width: 90% !important;
+        top: 0% !important;
+        line-height: 40px !important;
+    }
     
 /*    Projects options */
     .projects-options {
@@ -612,19 +632,19 @@ html, body {
   #slide01 .bcg-color {background: -webkit-gradient(linear, left top, right top, from(#FC866E), color-stop(37%, #FC866E), to(#FD746C));background: linear-gradient(to right, #FC866E 0%, #FC866E 37%, #FD746C 100%)}
   #slide01 .primary { color: #FC866E;}
   #slide02 .bcg-color {
-/*
       background: -webkit-gradient(linear, left top, right top, from(#6C45BB),color-stop(37%, #6C45BB),to(#c86dd7));
       background: linear-gradient(to right, #6C45BB 0%,#6C45BB 37%,#c86dd7 100%);
-*/
-      background: url('../img/chetster.png') center center fixed / cover;
+/*      background: url('../img/chetster.png') center center fixed / cover;*/
   }
   #slide02 .primary {
       color: #6C45BB;
   }
+    
   #slide03 .bcg-color {
       background: -webkit-gradient(linear, left top, right top, from(#2D5978), color-stop(37%, #2D5978),to(#2c3e50));
       background: linear-gradient(to right, #2D5978 0%, #2D5978 37%,#2c3e50 100%);
   }
+    
   #slide03 .primary {
       color: #2D5978;
   }

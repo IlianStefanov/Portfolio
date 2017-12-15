@@ -374,7 +374,6 @@ $(document).ready(function(){
 				crossFadeTl.add([fadeInSVG,introAnimationTl], 'countingUp+=1.4');
 
 			}
-
 		}
 
 		function hideOldSlide($slideOut){
@@ -393,20 +392,18 @@ $(document).ready(function(){
 
 			} else {
 
-				$slideInNumber.text(newValue+'%'); //not good for the first and last slide
-
-			}
+				$slideInNumber.text(newValue+'%'); 
+                //not good for the first and last slide
+            }
 
 		}
 
 		function updateNav(slideOutID, slideInID){
-
 			// remove active class from all dots
 			$('.nav-items li').removeClass('active');
 
 			// add active class to the new active slide
 			TweenMax.set($('.nav-items li.nav-item'+slideInID), {className: '+=active'});
-
 		}
 
 		// animate slide IN
@@ -425,8 +422,7 @@ $(document).ready(function(){
 				.from($awwwLogo, 0.3, {autoAlpha: 0}, '-=0.3')
 				.from([$svgBase, $awwwLogo], 1.2, {y: -115, ease:Power4.easeInOut}, "+=0.2")
 				.add('fade')
-				.staggerFrom($layer, 2, {autoAlpha: 0, y: -10, ease:Power4.easeInOut}, 0.2, 'fade-=1.5')
-				;
+				.staggerFrom($layer, 2, {autoAlpha: 0, y: -10, ease:Power4.easeInOut}, 0.2, 'fade-=1.5');
 
 			var $slideInNumber = $slideIn.find('.title-section'),
 				$slideInTitle = $slideIn.find('.fade-txt'),
@@ -470,7 +466,9 @@ $(document).ready(function(){
 			TweenLite.to(window, 0.7, {scrollTo: finalOffset, ease:Power4.easeOut});
 
 		});
-
+        
+        
+        
 	}
 
 });
