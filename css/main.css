@@ -292,6 +292,11 @@ html, body {
   body {
     opacity: 0;
   }
+    
+  .slide {
+      height: auto;
+      text-align: center;
+    }    
   .no-js body,
   .touch body {
     opacity: 1;
@@ -489,6 +494,87 @@ html, body {
     
     
 /* =Slide 05 Skills section */
+    
+   .container {
+  height: 300px;
+  max-width: 500px;
+  background: #f2f2f2;
+  margin: 0 auto;
+}
+
+.progress-bar {
+  margin: 0 0 10px;
+  overflow: hidden;
+  padding-right: 24px; /* Separate bars from container */
+}
+
+.progress-title-holder {
+  padding-bottom: 7px;
+  position: relative;
+  margin: 5px 0;
+  font-family: Montserrat, sans-serif;
+  font-size: 15px;
+  line-height: 15px;
+  font-weight: 400;
+  color: #2e2e2e;  
+}
+
+.progress-title {
+  z-index: 100;
+}
+
+.progress-number-wrapper {
+  width: 100%;
+  z-index: 10;
+}
+
+.progress-number-mark {
+  margin-bottom: 4px;
+  border-radius: 3px;
+  background-color: rgb(22,23,29);
+  padding: 0 8px;
+  position: absolute;
+  bottom: 0;
+  transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%); 
+} 
+
+.progress-number-wrapper,
+.progress-number-mark {
+  font-family: Open Sans, sans-serif;
+  font-size: 11px;
+  line-height: 24px;
+  height: 24px;
+  letter-spacing: 0px;
+  font-weight: 600;
+  font-style: normal;
+  text-transform: none;
+  color: #ffffff;
+}
+
+.down-arrow {
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 3px solid #16171d;
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);  
+}
+
+.progress-content-outter {
+  height: 12px;
+  background-color: #ffffff;
+}
+
+.progress-content {
+  height: 21px;
+  background-color: rgba(67, 243, 183, .92);
+  width: 0%; /* Initial value */
+}
     .skills-style {
         display: inline-block;
         line-height: 10px !important;
@@ -547,6 +633,7 @@ html, body {
         display: block;
         
     }
+    
     #proj1 {background: url(../img/chetster.png);                        width:33.33%;height:33.33vh;}
     #proj2 {background: url(../img/2d1638f9912f69319653d449d399d3ef.jpg);width:33.33%;height:33.33vh;}
     #proj3 {background: url(../img/1PbO2RY.jpg);                         width:33.33%;height:33.33vh;}

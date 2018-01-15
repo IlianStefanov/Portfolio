@@ -19,6 +19,8 @@ $(document).ready(function(){
             afterRender:function() {}
         });
     });
+    
+    enquire.register("screen and (max-width: 1025px)", function() {});
 	// Variables
 	var controller,
 		$navItem = $('.nav-items li').not('.active'),
@@ -214,16 +216,16 @@ $(document).ready(function(){
 				$slideOutTitle = $slideOut.find('.title .fade-txt'),
 				$slideOutNumber = $slideOut.find('.title-section'),
                 $slideOutProjects = $slideOut.find('.projects-listing'),
-                $slideOutOptions = $slideIn.find('.projects-options'),
-
-                // slide in
+                $slideOutOptions = $slideOut.find('.projects-options'),
 				$slideInBcg = $slideIn.find('.bcg-color'),
 				$slideInTitle = $slideIn.find('.title .fade-txt'),
 				$slideInNumber = $slideIn.find('.title-section'),
 				$slideInBcgWhite = $slideIn.find('.primary .bcg'),
 				slideInValue = $slideInNumber.attr('data-value'),
                 $slideInProjects = $slideIn.find('.projects-listing'),
-                $slideInOptions = $slideIn.find('.projects-options')
+                $slideInOptions = $slideIn.find('.projects-options'),
+                $skillsPanel = $slideIn.find('.container'),
+                $skillsProgressBars= $slideIn.find('.progress-bar')
 				;
 
             console.log("projects listing: " + $slideOutProjects + "and projects out: " + $slideInProjects);
@@ -275,6 +277,7 @@ $(document).ready(function(){
 //				crossFadeTl.add(countUpTl, 'countingUp');
 
 			}
+            
             if(slideInID == 02) {
                 var slideAboutMeTl = new TimelineMax();
                 slideAboutMeTl
@@ -290,17 +293,8 @@ $(document).ready(function(){
                 $('.about-me-title').text("");
 //                var cursor = document.querySelector('.typed-cursor');
 //                cursor.parentNode.removeChild(cursor);
-            }
-            
-            if(slideInID == 03) {
-                var slideEducation = new TimelineMax();
-                slideEducation
-                    .fromTo($slideInNumber, 0.4, {autoAlpha:0, x: '-=30'}, {scrambleText: 'EDUCATION', autoAlpha: 1, x: 0, ease:Power1.easeOut});
                 
-                crossFadeTl.add(slideEducation, 'countingUp');
             }
-            
-            // Animating PROJECTS Listing
             if(slideInID == 04) {
 
                 var projectsListing = new TimelineMax();
@@ -320,14 +314,35 @@ $(document).ready(function(){
                 var projectsListingOut = new TimelineMax();
                 projectsListingOut
                 .to($slideOutOptions, 0.4, {autoAlpha: 0, ease:Power1.easeOut}) 
-                .staggerTo($slideOutProjects, 0.1, {autoAlpha: 0, ease: Power1.easeOut}, 0.1)
+                .staggerFromTo($slideOutProjects, 0.3, {autoAlpha: 1, ease: Power1.easeOut}, {autoAlpha: 0,
+                    }, 0.1);
                 
-      
-//                .to($slideOutOptions, 0.3, {autoAlpha: 0, x: '-=20', ease:Power1.easeOut})
-//                .to($slideOutNumber, 0.3, {autoAlpha: 0, x: '-=20', ease:Power1.easeOut}); 
           
-                crossFadeTl.add(projectsListingOut, 'countingUp');
+                crossFadeTl.add(projectsListingOut, 'countingUp-=1.5');
             }
+            
+            
+            if(slideInID == 03) {
+                var slideEducation = new TimelineMax();
+                slideEducation
+                    .fromTo($slideInNumber, 0.4, {autoAlpha:0, x: '-=30'}, {scrambleText: 'EDUCATION', autoAlpha: 1, x: 0, ease:Power1.easeOut});
+                
+                crossFadeTl.add(slideEducation, 'countingUp');
+            } 
+            
+            if(slideInID == 05) {
+               
+//                skillsTrigger();
+                var skillsTimeline = new TimelineMax({onComplete:skillsTrigger()});
+                    skillsTimeline
+                    .fromTo($skillsPanel, 0.4, {autoAlpha: 0},{autoAlpha: 1, ease:Power4.easeInOut})
+                    .staggerFromTo($skillsProgressBars, 0.3, {autoAlpha: 0}, {autoAlpha: 1,
+                    ease: Power1.easeOut}, 0.1);
+                        
+                crossFadeTl.add(skillsTimeline, 'countingUp');
+            }
+            
+            // Animating PROJECTS Listing
             
 
 			// colored background tween up/down
@@ -449,6 +464,24 @@ $(document).ready(function(){
               
 
 		}
+        
+        function skillsTrigger() {
+            jQuery('.progress-bar').each(function() {
+              jQuery(this).find('.progress-content').animate({
+                width:jQuery(this).attr('data-percentage')
+              },2000);
+              jQuery(this).find('.progress-number-mark').animate(
+                {left:jQuery(this).attr('data-percentage')},
+                {
+                 duration: 2000,
+                 step: function(now, fx) {
+                   var data = Math.round(now);
+                   jQuery(this).find('.percent').html(data + '%');
+                 }
+              });  
+            });
+        }
+        
 
 		$navItemLink.click(function(e){
 
