@@ -339,6 +339,7 @@ $(document).ready(function(){
                     .staggerFromTo($skillsProgressBars, 0.3, {autoAlpha: 0}, {autoAlpha: 1,
                     ease: Power1.easeOut}, 0.1);
                         
+                
                 crossFadeTl.add(skillsTimeline, 'countingUp');
             }
             

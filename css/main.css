@@ -498,7 +498,7 @@ html, body {
    .container {
   height: 300px;
   max-width: 500px;
-  background: #f2f2f2;
+  background: transparent;
   margin: 0 auto;
 }
 
@@ -567,7 +567,7 @@ html, body {
 
 .progress-content-outter {
   height: 12px;
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .progress-content {
@@ -586,6 +586,7 @@ html, body {
         width: 90% !important;
         top: 0% !important;
         line-height: 40px !important;
+        display: none;
     }
     
 /*    Projects options */
@@ -709,6 +710,7 @@ html, body {
     left: 0;
     text-align: center;
     width: 100%;
+    font-size: 75px;
   }
   .title {
     position: absolute;
